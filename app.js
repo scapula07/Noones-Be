@@ -16,7 +16,7 @@ app.use(cors({
 // app.options('*', cors());
 // app.use(express.static('./public'));
 
-app.router.post('/webhook', (req, res) => {
+app.post('/webhook', (req, res) => {
   const isValidationRequest = req.body.type === undefined;
    if (isValidationRequest) {
       res.set("X-NoOnes-Request-Challenge", req.headers['x-noones-request-challenge']);
