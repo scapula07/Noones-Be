@@ -16,6 +16,17 @@ app.use(cors({
 // app.options('*', cors());
 // app.use(express.static('./public'));
 
+app.router.post('/webhook', (req, res) => {
+  const isValidationRequest = req.body.type === undefined;
+   if (isValidationRequest) {
+      res.set("X-NoOnes-Request-Challenge", req.headers['x-noones-request-challenge']);
+     console.log("Accepted the challenge")
+      return;
+    }
+    console.log(isValidationRequest,"validdd")
+}
+)
+
 app.use(express.json({ limit: '10kb' }));
 app.use('/api/v1', dbRoutes);
 
