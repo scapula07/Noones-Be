@@ -18,17 +18,20 @@ app.use(cors({
 
 app.post('/webhook', (req, res) => {
   // const isValidationRequest = req.body.type === undefined;
-   if (true) {
-      res.set("X-NoOnes-Request-Challenge", req.headers['x-noones-request-challenge']);
-     console.log("Accepted the challenge")
-     res.status(200).json({
-      status: 'success',
-      data:"Succeess"
-     });
-      return;
-    }
-    console.log(isValidationRequest,"validdd")
-}
+   console.log(req.body,"Request body>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+   console.log(req,"RRRRRR>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+
+  //  if (true) {
+  //     res.set("X-NoOnes-Request-Challenge", req.headers['x-noones-request-challenge']);
+  //    console.log("Accepted the challenge")
+  //    res.status(200).json({
+  //     status: 'success',
+  //     data:"Succeess"
+  //    });
+  //     return;
+  //   }
+  //   console.log(isValidationRequest,"validdd")
+      }
 )
 
 app.use(express.json({ limit: '10kb' }));
