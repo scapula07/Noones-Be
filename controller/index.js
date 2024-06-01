@@ -53,6 +53,10 @@ exports.recentTrades= async (req, res, next) => {
         })
         .catch(error => {
             console.error('Error:', error);
+            res.status(400).json({
+              status: 'error',
+              data:error?.data
+           });
         });
 
 
@@ -91,6 +95,10 @@ exports.recentTrades= async (req, res, next) => {
  })
  .catch(error => {
      console.error('Error:', error);
+     res.status(401).json({
+      status: 'error',
+      data:error?.data
+   });
  });
 
 
@@ -121,7 +129,7 @@ exports.getTrade= async (req, res, next) => {
      console.log('Access Token:', response.data);
      res.status(200).json({
        status: 'success',
-       data:response.data?.data?.trades
+       data:response.data?.data
    });
  })
  .catch(error => {
@@ -147,7 +155,7 @@ exports.release= async (req, res, next) => {
   const {token,hash} = req.body
   console.log(req.body,"ttttt")
  try{
-   axios.post('https://api.noones.com/noones/v1/trade/list',{}, {
+   axios.post('https://api.noones.com/noones/v1/trade/release',{trade_hash:hash}, {
      headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization' : `Bearer ${token} `
@@ -298,6 +306,40 @@ exports.getImage= async (req, res, next) => {
   console.log(req.body,"ttttt")
  try{
    axios.post('https://api.noones.com/noones/v1/trade-chat/post',{message:msg,trade_hash:hash}, {
+     headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization' : `Bearer ${token} `
+          }
+      })
+ .then(response => {
+     console.log('Access Token:', response.data);
+     res.status(200).json({
+       status: 'success',
+       data:response.data
+   });
+ })
+ .catch(error => {
+     console.error('Error:', error);
+ });
+
+
+
+
+
+
+}catch(e){
+   console.log(e)
+}
+
+}
+
+
+
+exports.getUser= async (req, res, next) => {
+  const {token} = req.body
+  console.log(req.body,"ttttt")
+ try{
+   axios.post('https://api.noones.com/noones/v1/user/wallet-balances',{}, {
      headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization' : `Bearer ${token} `
